@@ -1,7 +1,7 @@
 # rust-notes
 A place for my rust notes
 
-# LamdaConf 2015 - In Rust we Trust Alex Burkhart
+# [LamdaConf 2015 - In Rust we Trust Alex Burkhart](https://www.youtube.com/watch?v=-dxqbhLIgdM)
 
 ## Data Race
 - 2 + threads accessing the same data
