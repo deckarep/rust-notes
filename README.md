@@ -1,5 +1,5 @@
 # rust-notes
-A place for my rust notes
+A place for my rust notes. This is a repo that I'll be building out to aggregate my adventure with learning rust.  It will contain my own content as well as content from others and all Copyright Claim is held accordingly by each original author's works.
 
 ## [Intro to Rust - Alex Crichton](https://www.youtube.com/watch?v=agzf6ftEsLU)
 
