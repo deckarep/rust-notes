@@ -58,7 +58,9 @@ fn main() {
         });
     }
 
-    for data in &rx {
+    drop(tx); // Effectively closes the channel
+
+    for data in rx {
         println!("{:?}", data);
     }
 }
@@ -89,7 +91,9 @@ fn main() {
         });
     }
 
-    for data in &rx {
+    drop(tx); // Effectively closes the channel
+
+    for data in rx {
         println!("{:?}", data);
     }
 }
@@ -123,7 +127,9 @@ fn main() {
         });
     }
 
-    for data in &rx {
+    drop(tx); // Effectively closes the channel
+
+    for data in rx {
         println!("{:?}", data);
     }
 }
