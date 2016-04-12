@@ -6,26 +6,26 @@ A place for my rust notes. This is a repo that I'll be building out to aggregate
 ### Axioms of Rust
 
 #### Ownership and Borrowing
-- There is only ever one owner of data
-- Ownership can be transferred to a new owner; a move.
-- Ownership is a deep property of a type
-- Owned values can be borrowed temporarily
-- Borrowed values are only valid for a particular lifetime
-- Borrowing prevents moving -- while there is an active borrow, the owner cannot be moved
+- There is only ever **one owner of data**
+- Ownership can be transferred to a new owner; this is known as a **move**.
+- Ownership is a **deep property** of a type
+- Owned values can be **borrowed temporarily**
+- Borrowed values are only valid for a **particular lifetime**
+- **Borrowing prevents moving** -- while there is an active borrow, the owner cannot be moved
 - Borrows can be nested
-- Borrowed values can become owned values through cloning
+- Borrowed values can become owned values through **cloning**
 
 #### Memory Management
-- Each variable has a scope it is valid for, and it is automatically deallocated when it goes out of scope
+- Each variable has **a scope it is valid for**, and it is **automatically deallocated** when it goes out of scope
 - Reference counting is another way of managing memory -- RC type
-- Rust has shared memory but you must explicitly opt into it
+- Rust has shared memory but you must **explicitly opt into it**
 
 #### Mutability
-- Values are immutable by default
+- Values are **immutable by default**
 - Mutability is also part of the type of a borrowed pointer
 - Borrowed pointers may coerce
-- Values can be frozen by borrowing
-- Mutability propagates deeply into owned types (just like ownership does)
+- Values can be **frozen by borrowing**
+- **Mutability propagates deeply** into owned types (just like ownership does)
 
 #### Concurrency
 - Parallelism is achieved at the granularity of an OS thread
