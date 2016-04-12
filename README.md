@@ -1,14 +1,47 @@
 # rust-notes
 A place for my rust notes
 
-# [LamdaConf 2015 - In Rust we Trust Alex Burkhart](https://www.youtube.com/watch?v=-dxqbhLIgdM)
+## [Intro to Rust - Alex Crichton](https://www.youtube.com/watch?v=agzf6ftEsLU)
 
-## Data Race
+### Axioms of Rust
+
+#### Ownership and Borrowing
+- There is only ever one owner of data
+- Ownership can be transferred to a new owner; a move.
+- Ownership is a deep property of a type
+- Owned values can be borrowed temporarily
+- Borrowed values are only valid for a particular lifetime
+- Borrowing prevents moving -- while there is an active borrow, the owner cannot be moved
+- Borrows can be nested
+- Borrowed values can become owned values through cloning
+
+#### Memory Management
+- Each variable has a scope it is valid for, and it is automatically deallocated when it goes out of scope
+- Reference counting is another way of managing memory -- RC type
+- Rust has shared memory but you must explicitly opt into it
+
+#### Mutability
+- Values are immutable by default
+- Mutability is also part of the type of a borrowed pointer
+- Borrowed pointers may coerce
+- Values can be frozen by borrowing
+- Mutability propagates deeply into owned types (just like ownership does)
+
+#### Concurrency
+- Parallelism is achieved at the granularity of an OS thread
+- Safety is achieved by requiring that a `proc` owns captured variables  <== to to check this for newer Rust
+- Threads can communicate with channels
+- Tasks can also share memory -- Arc type <== check this for newer Rust
+
+
+## [LamdaConf 2015 - In Rust we Trust Alex Burkhart](https://www.youtube.com/watch?v=-dxqbhLIgdM)
+
+### Data Race
 - 2 + threads accessing the same data
 - at least 1 is unsynchronized
 - at least 1 is writing
 
-## Shared Nothing
+### Shared Nothing
 
 ```Rust
 use std::sync::mpsc::channel;
@@ -31,7 +64,7 @@ fn main() {
 }
 ```
 
-## Shared Immutable Memory
+### Shared Immutable Memory
 
 ```Rust
 use std::sync::mpsc::channel;
@@ -62,7 +95,7 @@ fn main() {
 }
 ```
 
-## Mutation with Synchronization
+### Mutation with Synchronization
 ```Rust
 use std::sync::mpsc::channel;
 use std::thread;
