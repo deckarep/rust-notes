@@ -134,23 +134,21 @@ fn main() {
 use std::thread;
 use std::sync::mpsc;
 
-fn main() {
-    let (tx, rx) = mpsc::channel::<u32>();
-    {
-        // Note the lack of clone: the sender must be MOVED here.
-        // Dropping the clone does not drop the last sender off the channel
-        // and it will hang.
-        thread::spawn(move || {
-            for i in 1..11 {
-                tx.send(i).unwrap();
-            }
-            // Drop the sender after filling the channel.
-            drop(tx);
-        });
-    }
+fn gen_range(start: i32, end: i32) -> mpsc::Receiver<i32> {
+    let (tx, rx) = mpsc::channel::<i32>();
+    thread::spawn(move || {
+        for i in start..end {
+            tx.send(i).unwrap();
+        }
+        drop(tx);
+    });
+    return rx;
+}
 
-    // The loop will end when the sender is dropped.
-    for x in rx {
+fn main() {
+    let range = gen_range(0, 50);
+    
+    for x in range {
         println!("{}", x);
     }
 }
