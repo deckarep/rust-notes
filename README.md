@@ -29,7 +29,10 @@ A place for my rust notes. This is a repo that I'll be building out to aggregate
 
 #### Concurrency
 - Parallelism is achieved at the granularity of an OS thread
-- When using mutexes, lock data not code
+- Rust's channels enforce thread isolation
+- Thread safety isn't just documentation; it's the law
+- Even the most daring forms of sharing are guaranteed safe in Rust
+- Lock data; not code -- is enforced in rust
 - Safety is achieved by requiring that a `proc` owns captured variables  <== to to check this for newer Rust
 - Threads can communicate with channels
 - Tasks can also share memory -- Arc type <== check this for newer Rust
