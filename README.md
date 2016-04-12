@@ -29,6 +29,7 @@ A place for my rust notes. This is a repo that I'll be building out to aggregate
 
 #### Concurrency
 - Parallelism is achieved at the granularity of an OS thread
+- When using mutexes, lock data not code
 - Safety is achieved by requiring that a `proc` owns captured variables  <== to to check this for newer Rust
 - Threads can communicate with channels
 - Tasks can also share memory -- Arc type <== check this for newer Rust
