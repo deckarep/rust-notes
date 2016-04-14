@@ -159,3 +159,97 @@ fn main() {
     }
 }
 ```
+
+### Ranges, Arrays, Slices, Vectors, Iterators oh my...
+
+#### [Ranges](http://killercup.github.io/trpl-ebook/trpl-2015-09-26.a4.pdf)
+```Rust
+ 	// Key take-aways: 
+    // - Ranges start off as iterators (notice no need to convert)
+    // - Ranges can represent infinite sequences
+    // - Collecting must occur due to lazy evaluation
+    
+    // This does not actually generate anything
+    let nums = 1..100;
+    
+    // It must be consumed
+    let nums = (1..100).collect::<Vec<i32>>();
+
+    // Collect a range into a vector
+    let one_to_one_hundred = (1..101).collect::<Vec<_>>();
+    print_type_of(&one_to_one_hundred); //std::vec::Vec<i32>
+
+    // Find numbers in range returning an Option
+    let greater_than_forty_two = (0..100).find(|x| *x > 42);
+    print_type_of(&greater_than_forty_two); //std::option::Option<i32>
+
+    match greater_than_forty_two {
+        Some(_) => println!("We got some numbers!"),
+        None => println!("No numbers found :("),
+    }
+    
+    // Filter numbers in range returning a vector
+    let greater_than_forty_two = (0..100)
+        .filter(|x| *x > 42)
+        .collect::<Vec<_>>();
+
+    print_type_of(&greater_than_forty_two); //std::vec::Vec<i32>
+    println!("greater_than_forty_two: {:?}", greater_than_forty_two);
+```
+
+
+### [Let's get functional](https://mmstick.gitbooks.io/rust-programming-phoronix-reader-how-to/content/chapter02.html)
+
+#### With numbers again
+```Rust
+let numbers_iterator = [0,2,3,4,5].iter();
+
+let sum = numbers_iterator
+ 	.fold(0, |total, next| total + next)
+	.collect();
+
+let squared = (1..10).iter()
+	.map(|&x| x * x).collect();
+```
+
+#### With numbers again
+```Rust
+fn main() {
+    let inf_range = (1..)         // Infinite range of integers
+        .filter(|x| x % 2 != 0)   // Collect odd numbers
+        .take(5)                  // Only take five numbers
+        .map(|x| x * x)           // Square each number
+        .collect::<Vec<usize>>(); // Return as a new Vec<usize>
+
+    println!("{:?}", inf_range);  // Print result
+}
+```
+
+#### With Strings
+```Rust
+fn main() {
+    let sentence = "This is a sentence in Rust.";
+    let words: Vec<&str> = sentence
+  		.split_whitespace()
+        .collect();
+
+    let words_containing_i: Vec<&str> = words.into_iter()
+        .filter(|word| word.contains("i"))
+        .collect();
+
+    println!("{:?}", words_containing_i);
+}
+```
+
+### What type am I?
+This feature requires Rust Nightly, this helper method allows for figuring out what type you are working with
+Just pass a reference to it of whatever type you are holding
+
+```Rust
+#![feature(core_intrinsics)]
+
+fn print_type_of<T>(_: &T) -> () {
+    let type_name = unsafe { std::intrinsics::type_name::<T>() };
+    println!("{}", type_name);
+}
+```
