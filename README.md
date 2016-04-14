@@ -28,10 +28,10 @@ A place for my rust notes. This is a repo that I'll be building out to aggregate
 - **Mutability propagates deeply** into owned types (just like ownership does)
 
 #### Concurrency
-- Parallelism is achieved at the granularity of an OS thread
-- Safety is achieved by requiring that a `proc` owns captured variables  <== to to check this for newer Rust
-- Threads can communicate with channels
-- Tasks can also share memory -- Arc type <== check this for newer Rust
+- Rust's channels enforce thread isolation
+- Thread safety isn't just documentation; it's the law
+- Even the most daring forms of sharing are guaranteed safe in Rust
+- Lock data; not code is enforced in Rust
 
 
 ## [LamdaConf 2015 - In Rust we Trust Alex Burkhart](https://www.youtube.com/watch?v=-dxqbhLIgdM)
