@@ -34,6 +34,57 @@ A place for my rust notes. This is a repo that I'll be building out to aggregate
 - Lock data; not code is enforced in Rust
 
 
+## Iterators [Rust Camp 2015 - Who Owns this Stream of Data?](https://www.youtube.com/watch?v=NGW17shYtRM)
+
+### IntoIter - Owned Values (T)
+- Moves the data out of the collection
+- You get total ownership
+- Can do anything with the data, including destroy it
+
+```Rust
+fn process(data: Vec<String>){
+	for s in data.into_iter() {
+		println!("{}", s);
+	}
+
+    // Oh no! Iterating consumed it :(
+	println!("{}", data.len()); //~ERROR
+}
+```
+
+### Iter - Shared References (&T)
+- Iter lets you look but not touch :)
+- Shares the data in the collection
+- Read-only access
+- Can have many readers at once
+
+```Rust
+fn print(data: &Vec<String>){
+	for s in data.iter(){
+		//All I can do is read :/
+		println!("{}", s);
+	}
+    // Yay it lives!
+	println!("{}", data.len());
+}
+```
+
+### IterMut - Mutable References (&mut T)
+- Loans the data in the collection
+- Read-Write access
+- Only one loan at once
+- IterMut gives you exclusive access
+
+```Rust
+fn make_better(data: &mut Vec<String>){
+	for s in data.iter_mut(){
+		//Ooh I can mutate you!
+		s.push_str("!!!!");
+		//But I can't share :(
+	}
+}
+```
+
 ## [LamdaConf 2015 - In Rust we Trust Alex Burkhart](https://www.youtube.com/watch?v=-dxqbhLIgdM)
 
 ### Data Race
