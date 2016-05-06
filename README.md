@@ -35,6 +35,7 @@ A place for my rust notes. This is a repo that I'll be building out to aggregate
 
 
 ## Iterators [Rust Camp 2015 - Who Owns this Stream of Data?](https://www.youtube.com/watch?v=NGW17shYtRM)
+Why are there so many types of Iterators in Rust?  The answer lies in Ownership.
 
 ### IntoIter - Owned Values (T)
 - Moves the data out of the collection
@@ -84,6 +85,26 @@ fn make_better(data: &mut Vec<String>){
 	}
 }
 ```
+
+### Drain - I Drink Your Milkshake (Milkshake T) 
+- Drain lets you partially move the data
+- Full access to the elements
+- Doesn't destroy the container
+
+```Rust
+let mut data = vec![0, 1, 2, 3, 4, 5];
+
+for x in data.drain(2..4){
+	// got exclusive access so we can "drain"
+	// the values out but leave the vec alive
+	consume(x);
+}
+
+// data lives on! We can reuse the allocation!
+// Bulk `remove`!
+assert_eq!(&*data, &[0, 1, 4, 5]);
+```
+
 
 ## [LamdaConf 2015 - In Rust we Trust Alex Burkhart](https://www.youtube.com/watch?v=-dxqbhLIgdM)
 
